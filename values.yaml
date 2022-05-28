@@ -20,7 +20,7 @@ airflow:
   ## - allowed values: "CeleryExecutor", "KubernetesExecutor", "CeleryKubernetesExecutor"
   ## - customize the "KubernetesExecutor" pod-template with `airflow.kubernetesPodTemplate.*`
   ##
-  executor: CeleryExecutor
+  executor: KubernetesExecutor
 
   ## the fernet encryption key (sets `AIRFLOW__CORE__FERNET_KEY`)
   ## - [WARNING] you must change this value to ensure the security of your airflow
@@ -1626,7 +1626,7 @@ extraManifests: []
 pgbouncer:
   ## if the pgbouncer Deployment is created
   ##
-  enabled: true
+  enabled: false
 
   ## configs for the pgbouncer container image
   ##
@@ -1813,7 +1813,7 @@ postgresql:
   ## - [WARNING] consider using an external database with `externalDatabase.*`
   ## - set to `false` if using `externalDatabase.*`
   ##
-  enabled: true
+  enabled: false
 
   ## the postgres database to use
   ##
@@ -1889,11 +1889,11 @@ externalDatabase:
   ## the type of external database
   ## - allowed values: "mysql", "postgres"
   ##
-  type: postgres
+  type: mysql
 
   ## the host of the external database
   ##
-  host: localhost
+  host: mysql.example.org
 
   ## the port of the external database
   ##
@@ -1910,26 +1910,26 @@ externalDatabase:
   ## the name of a pre-created secret containing the external database user
   ## - if set, this overrides `externalDatabase.user`
   ##
-  userSecret: ""
+  ##userSecret: ""
 
   ## the key within `externalDatabase.userSecret` containing the user string
   ##
-  userSecretKey: "postgresql-user"
+  ##userSecretKey: "postgresql-user"
 
   ## the password for the external database
   ## - [WARNING] to avoid storing the password in plain-text within your values,
   ##   create a Kubernetes secret and use `externalDatabase.passwordSecret`
   ##
-  password: ""
+  password: "mysql06"
 
   ## the name of a pre-created secret containing the external database password
   ## - if set, this overrides `externalDatabase.password`
   ##
-  passwordSecret: ""
+  ##passwordSecret: ""
 
   ## the key within `externalDatabase.passwordSecret` containing the password string
   ##
-  passwordSecretKey: "postgresql-password"
+  ##passwordSecretKey: "postgresql-password"
 
   ## extra connection-string properties for the external database
   ##
